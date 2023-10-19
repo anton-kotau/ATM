@@ -20,4 +20,4 @@ class bankAccount():
         return Result (False,"bomz,because try to withdrawal: ", value)
     def screenATM(self):
         print("Your Balance:", self.myBalance ,"$")
-    
+    """test"""
