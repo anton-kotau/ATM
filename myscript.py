@@ -1,6 +1,8 @@
-from bank_account import bankAccount
+#from bank_account import bankAccount
+from bank_account import MinimumBalanceAccount
 
-
+accountMin = MinimumBalanceAccount(myBalance=1500, minimumBalance=1000)
+"""
 ATM = bankAccount()
 result = ATM.deposit(4)
 if(result.isSuccess):
@@ -17,4 +19,9 @@ else:
     print(result.message, result.amount, "$")
 
 ATM.screenATM()
-"""test"""
+"""
+
+result = accountMin.try_withdrawal(300)
+
+accountMin.deposit(500)
+print(result.message)
