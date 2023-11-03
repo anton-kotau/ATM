@@ -1,23 +1,18 @@
 from unittest import result
+from Result import Ok,Error
 
-
-class Result():
-    def __init__(self,isSuccess,message,amount):
-        self.isSuccess = isSuccess
-        self.message = message  
-        self.amount = amount
 
 class bankAccount():
     def __init__(self, myBalance = 0):
         self.myBalance = myBalance
     def deposit(self, value):
         self.myBalance += value
-        return Result(True,"Cash in:", value )
+        return Ok ("Cash in:", value )
     def try_withdrawal(self, value):
         if(self.myBalance > value ):
             self.myBalance = value
-            return Result(True,"Cash out:", value)
-        return Result (False,"bomz,because try to withdrawal: ", value)
+            return Ok("Cash out", value)
+        return Error ("bomz,because try to withdrawal: ", value)
     def screenATM(self):
         print("Your Balance:", self.myBalance ,"$")
     def __str__(self):
@@ -31,5 +26,5 @@ class MinimumBalanceAccount(bankAccount):
         if self.myBalance - value >= self.minimumBalance:
             return super().try_withdrawal(value)
         else:
-            return Result(False,"Cancel", value)
+            return Error("Cancel", value)
             
