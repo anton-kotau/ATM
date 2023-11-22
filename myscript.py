@@ -20,7 +20,7 @@ else:
 ATM.screenATM()
 """
 accountMin = MinimumBalanceAccount(myBalance=1500, minimumBalance=1000)
-result = accountMin.try_withdrawal(990)
+result = accountMin.try_withdrawal(290)
 
 accountMin.deposit(500)
 print(result.message, result.amount, "$")
