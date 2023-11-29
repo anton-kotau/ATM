@@ -32,7 +32,11 @@ def click_Ok_button():
         deposit(int(input_text))
     else:
         print("Error")
-        
+
+def click_Cancel_button():
+    transaction_entry.delete(0, tk.END)
+    
+
 for text in buttons_text:
     if text in ["1", "2", "3", 
     "4", "5", "6", 
@@ -41,10 +45,12 @@ for text in buttons_text:
     ]:
         button = tk.Button(ATM, text=text, width=5, height=2, bg="lightgrey", fg="navy", font=("Arial",13), relief=tk.RAISED, command=lambda value=text: handle_button_click(value))
         buttons.append(button)
-    elif text=="Ok" or text=="Cancel":
+    elif text=="Ok":
            button = tk.Button(ATM, text=text, width=5, height=2, bg="lightgrey", fg="navy", font=("Arial",13), relief=tk.RAISED, command= click_Ok_button)
            buttons.append(button)
-
+    elif text=="Cancel":
+            button = tk.Button(ATM, text=text, width=5, height=2, bg="lightgrey", fg="navy", font=("Arial",13), relief=tk.RAISED, command= click_Cancel_button)
+            buttons.append(button)
         
 
 def handle_button_click(value):
@@ -62,8 +68,11 @@ myBalance = 0
 
 #screen_output:
 
-def deposit():
-    deposit_amount = int(transaction_entry.get())
+def deposit(amount=None):
+    if amount is None:
+        deposit_amount = int(transaction_entry.get())
+    else:
+        deposit_amount = amount
     result = account.deposit(deposit_amount)
     if result.is_ok():
         balance_label.config(text=f"Balance: {account.get_balance()}$ ")
