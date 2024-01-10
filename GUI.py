@@ -1,17 +1,14 @@
-from curses.ascii import isdigit
 import tkinter as tk
-from bank_account import bankAccount
-from Result import Ok, Error
+from bank_account import bankAccount , MinimumBalanceAccount
 
 ATM = tk.Tk()
 ATM.title("ATM")
-ATM.iconbitmap("C:\\projects\\Bank_account\\atm.ico")
+ATM.iconbitmap("atm.ico")
 window_height = 700
 window_width = 600
 ATM.geometry(f"{window_height}x{window_width}")
 
-
-#buttons:
+#buttons
 #positionAndFormatNumbers
 horizontal_spacing = 60
 vertical_spacing = 60
@@ -36,7 +33,6 @@ def click_Ok_button():
 def click_Cancel_button():
     transaction_entry.delete(0, tk.END)
     
-
 for text in buttons_text:
     if text in ["1", "2", "3", 
     "4", "5", "6", 
@@ -52,7 +48,6 @@ for text in buttons_text:
             button = tk.Button(ATM, text=text, width=5, height=2, bg="lightgrey", fg="navy", font=("Arial",13), relief=tk.RAISED, command= click_Cancel_button)
             buttons.append(button)
         
-
 def handle_button_click(value):
     current_text = transaction_entry.get()
     transaction_entry.delete(0, tk.END)
@@ -66,8 +61,7 @@ for button in buttons:
         y += vertical_spacing
 myBalance = 0 
 
-#screen_output:
-
+#screen_output
 def deposit(amount=None):
     if amount is None:
         deposit_amount = int(transaction_entry.get())
@@ -96,6 +90,7 @@ def try_withdrawal():
     else:
         balance_label.config(text=result.message)
     transaction_entry.delete(0, tk.END)
+minimum_balance_account = MinimumBalanceAccount(minimumBalance=50)
 
 def exit():
     ATM.quit()
@@ -104,8 +99,8 @@ menu_frame = tk.Frame(ATM)
 menu_frame.pack(pady=50)
 
 menu = tk.Menu(ATM)
-menu.add_command(label="Deposit", command=deposit)
-menu.add_command(label="Withdrawal", command=try_withdrawal)
+menu.add_command(label="Deposit", command=lambda: deposit)
+menu.add_command(label="Withdrawal", command=lambda: try_withdrawal(minimum_balance_account))
 menu.add_command(label="Exit", command=exit)
 
 deposit_button = tk.Button(menu_frame, text="Deposit", command=deposit, width=7, height=1, bg="lightgrey", fg="navy", font=("Arial",9), relief=tk.RAISED)

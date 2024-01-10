@@ -19,13 +19,15 @@ class bankAccount():
             self.myBalance -= value
             return Ok("Cash out", value)
         return Error ("Error!", value)
+        time.s
+
     def screenATM(self):
-        print("Your Balance:", self.myBalance ,"$")
+        print("Your balance:", self.myBalance ,"$")
     def __str__(self):
         return str(myBalance)
     
 class MinimumBalanceAccount(bankAccount):
-    def __init__(self,myBalance=0, minimumBalance=500):
+    def __init__(self,myBalance=0, minimumBalance=50):
         super().__init__ (myBalance)
         self.minimumBalance = minimumBalance
     def try_withdrawal(self, value):
@@ -33,5 +35,5 @@ class MinimumBalanceAccount(bankAccount):
             self.myBalance -= value
             return super().try_withdrawal(value)
         else:
-            return Error("Cancel", value)
+            return Error("Cancel, you have minimum balance and you can't withdrawal", value)
             
